@@ -7,12 +7,18 @@ import {
 
 import z from 'zod'
 import { createGoal } from '../services/create-goal'
+import { getWeekPendingGoals } from '../services/get-week-pending-goals'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 // Add schema validator and serializer
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
+
+app.get('/goals-pending', async () => {
+  const pendingGoals = await getWeekPendingGoals()
+  return pendingGoals
+})
 
 app.post(
   '/goals',
