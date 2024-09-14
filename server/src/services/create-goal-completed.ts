@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { and, count, eq, gte, lte, sql } from 'drizzle-orm'
 import { db } from '../db'
-import { goalCompletions, goals } from '../db/schema'
+import { goalsCompletions, goals } from '../db/schema'
 
 interface CreateGoalCompletionRequestDTO {
   goalId: string
@@ -18,18 +18,18 @@ export async function createGoalCompleted({
     .as(
       db
         .select({
-          goalId: goalCompletions.goalId,
-          completionCount: count(goalCompletions.id).as('completionCount'),
+          goalId: goalsCompletions.goalId,
+          completionCount: count(goalsCompletions.id).as('completionCount'),
         })
-        .from(goalCompletions)
+        .from(goalsCompletions)
         .where(
           and(
-            lte(goalCompletions.createAt, lastDayOfWeek),
-            gte(goalCompletions.createAt, firstDayOfWeek),
-            eq(goalCompletions.goalId, goalId)
+            lte(goalsCompletions.createAt, lastDayOfWeek),
+            gte(goalsCompletions.createAt, firstDayOfWeek),
+            eq(goalsCompletions.goalId, goalId)
           )
         )
-        .groupBy(goalCompletions.goalId)
+        .groupBy(goalsCompletions.goalId)
     )
 
   const result = await db
@@ -57,7 +57,7 @@ export async function createGoalCompleted({
   }
 
   const insertResult = await db
-    .insert(goalCompletions)
+    .insert(goalsCompletions)
     .values({
       goalId: goalId,
     })

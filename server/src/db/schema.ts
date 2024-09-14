@@ -12,7 +12,7 @@ export const goals = pgTable('goals', {
     .defaultNow(),
 })
 
-export const goalCompletions = pgTable('goal_completion', {
+export const goalsCompletions = pgTable('goal_completion', {
   id: text('id')
     .notNull()
     .$defaultFn(() => createId()),
