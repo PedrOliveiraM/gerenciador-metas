@@ -15,6 +15,13 @@
       "when": 1726007988561,
       "tag": "0001_bouncy_arachne",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1726344365820,
+      "tag": "0002_melodic_madelyne_pryor",
+      "breakpoints": true
     }
   ]
 }
