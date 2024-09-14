@@ -5,21 +5,19 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 
-import z from 'zod'
-import { createGoal } from '../services/create-goal'
-import { getWeekPendingGoals } from '../services/get-week-pending-goals'
-import { createGoalCompleted } from '../services/create-goal-completed'
+import { createCompletedGoalRoute } from '../routes/create-completed-goal'
 import { createGoalRoute } from '../routes/create-goal'
 import { getPendingGoalsRoute } from '../routes/get-pending-goals'
-import { createCompletedGoalRoute } from '../routes/create-completed-goal'
+import { getWeekSummaryRoute } from '../routes/get-week-summary'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(getPendingGoalsRoute)
 app.register(createCompletedGoalRoute)
+app.register(getPendingGoalsRoute)
+app.register(getWeekSummaryRoute)
 app.register(createGoalRoute)
 
 app
