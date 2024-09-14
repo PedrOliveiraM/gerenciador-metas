@@ -24,8 +24,8 @@ export async function createGoalCompleted({
         .from(goalsCompletions)
         .where(
           and(
-            lte(goalsCompletions.createAt, lastDayOfWeek),
-            gte(goalsCompletions.createAt, firstDayOfWeek),
+            lte(goalsCompletions.createdAt, lastDayOfWeek),
+            gte(goalsCompletions.createdAt, firstDayOfWeek),
             eq(goalsCompletions.goalId, goalId)
           )
         )
